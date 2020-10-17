@@ -49,6 +49,7 @@ class OrderServiceTest {
     }
     // main logic that we are testing is the buy one get one free for apples
     // and the buy 2 get one free for oranges
+    // In addition, we are testing the condition of running out of fruit as well
     @Nested
     inner class FruitOffers() {
 
@@ -78,12 +79,38 @@ class OrderServiceTest {
         }
 
         @Test
-        fun `buy one get one free apples and orange condition multiple`() {
+        fun `buy one get one free apples and orange condition multiple (order failed condition)`() {
             val fruits = listOf<String>("Orange", "Apple", "Apple", "Orange", "Orange", "Orange", "Apple", "Apple", "Orange", "Orange")
+            val fruitOrder = FruitOffer()
+            val expectedResult = (-1).toBigDecimal()
+            assertThat(expectedResult, Matchers.comparesEqualTo(fruitOrder.addFruits(fruits)))
+        }
+
+        @Test
+        fun `buy one get one free apples and orange condition multiple (order = condition)`() {
+            val fruits = listOf<String>("Orange", "Apple", "Apple", "Orange", "Orange", "Orange", "Apple", "Apple", "Orange")
             val fruitOrder = FruitOffer()
             val expectedResult = 2.2.toBigDecimal()
             assertThat(expectedResult, Matchers.comparesEqualTo(fruitOrder.addFruits(fruits)))
         }
+
+        @Test
+        fun `buy one get one free apples and orange condition multiple (order = apple condition)`() {
+            val fruits = listOf<String>("Orange", "Apple", "Apple", "Orange", "Orange", "Orange", "Apple", "Apple", "Apple")
+            val fruitOrder = FruitOffer()
+            val expectedResult = 2.55.toBigDecimal()
+            assertThat(expectedResult, Matchers.comparesEqualTo(fruitOrder.addFruits(fruits)))
+        }
+
+        @Test
+        fun `buy one get one free apples and orange condition multiple (order failed apple condition)`() {
+            val fruits = listOf<String>("Orange", "Apple", "Apple", "Orange", "Orange", "Orange", "Apple", "Apple", "Apple", "Apple")
+            val fruitOrder = FruitOffer()
+            val expectedResult = (-1).toBigDecimal()
+            assertThat(expectedResult, Matchers.comparesEqualTo(fruitOrder.addFruits(fruits)))
+        }
+
+
 
         @Test
         fun `buy one get one free apples odd parity`() {
