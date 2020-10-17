@@ -1,9 +1,12 @@
+import OfferService.FruitOffer
+import lib.InputReader
+import lib.OutputPrinter
 
 fun main(vararg args: String) {
 
         val inputReader = InputReader()
         val outputPrinter = OutputPrinter()
-        val fruitOrder = FruitOrder()
+        val fruitOrder = FruitOffer()
 
         do {
                 // read in all of the fruits and add them to the fruit array

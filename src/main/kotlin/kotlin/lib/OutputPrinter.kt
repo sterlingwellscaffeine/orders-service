@@ -1,3 +1,5 @@
+package lib
+
 class OutputPrinter {
 
     fun printline(output: String){

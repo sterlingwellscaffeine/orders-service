@@ -1,3 +1,5 @@
+package lib
+
 import java.lang.Character.isWhitespace
 
 class InputReader {
